@@ -1,9 +1,14 @@
-import { keyframes } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { NumericFormat } from "react-number-format";
+import { NumericFormat, PatternFormat } from "react-number-format";
+
+export type ErrorProp = string | null;
 
 const BASE = 3;
 const SIZE = `${BASE}px`;
+const PRIMARY = "#4096ff";
+const PRIMARY_SHADOW = "0 0 0 2px rgba(5, 145, 255, 0.1)";
+const BORDER_COLOR = "#d9d9d9";
 const LIGHTER = "#b5b5b5";
 const DARKER = "#343536";
 const DANGER = "#c62828";
@@ -23,15 +28,33 @@ export const Label = styled.label`
   }
 `;
 
-export const NumericFormatStyled = styled(NumericFormat, {
-  shouldForwardProp(prop) {
-    return prop !== "isError";
-  },
-})<{ isError: boolean }>`
+const numericStyle = css`
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 11px;
+  border: 1px solid ${BORDER_COLOR};
+  border-radius: 6px;
+
+  &:focus-visible {
+    outline: none;
+    border-color: ${PRIMARY};
+    box-shadow: ${PRIMARY_SHADOW};
+  }
+`;
+
+export const CardInput = styled(PatternFormat)`
+  ${numericStyle}
+`;
+
+export const NumericPlain = styled(NumericFormat)`
+  ${numericStyle}
+`;
+
+export const NumericFormatStyled = styled(NumericFormat)`
   text-align: right;
   border: none;
   padding: 0;
-  color: ${({ isError }) => (isError ? DANGER : "inherit")};
   background-color: transparent;
   font-size: ${FONT_SIZE.Label};
   width: 140px;
@@ -114,14 +137,14 @@ export const indicator = keyframes`
   }
 `;
 
-export const Container = styled.div<{ isLoading: boolean }>`
+export const Container = styled.div<{ isLoading?: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
 
   &::after {
     content: "";
-    display: ${({ isLoading }) => (isLoading ? "block" : "none")};
+    display: ${({ isLoading = false }) => (isLoading ? "block" : "none")};
     position: absolute;
     width: ${SIZE};
     height: ${SIZE};
@@ -130,5 +153,13 @@ export const Container = styled.div<{ isLoading: boolean }>`
     right: -${SIZE};
     transform: translateY(100%);
     animation: ${indicator} 600ms linear infinite alternate;
+  }
+`;
+
+export const Contained = styled(Container)`
+  &::after {
+    right: unset;
+    left: 29px;
+    bottom: 7px;
   }
 `;

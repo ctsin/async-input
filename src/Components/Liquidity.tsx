@@ -1,4 +1,3 @@
-import { Row } from "antd";
 import { isString, isUndefined, random, round } from "lodash";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
@@ -11,18 +10,10 @@ import {
   NumericFormatStyled,
   Error,
   H1,
-  Button,
+  Row,
 } from "./Styled";
 import { sleep } from "./utilities";
-
-export interface Warrant {
-  warrantID: string;
-  warrantName: string;
-  amountAvailable: number;
-  evaluatedPrice: number | undefined;
-}
-
-export type Warrants = Warrant[];
+import { Warrant, Warrants } from "../interface/Warrant";
 
 export interface Input extends Pick<Warrant, "warrantID" | "evaluatedPrice"> {
   active: boolean;
@@ -177,7 +168,6 @@ export const Liquidity = () => {
                   placeholder="$ 0.00"
                   prefix="$ "
                   disabled={loading}
-                  isError={isString(inputs[index].error)}
                 />
                 {inputs[index].error && <Error>{inputs[index].error}</Error>}
               </Container>

@@ -1,4 +1,3 @@
-import { Row } from "antd";
 import { isEmpty, isNull, isUndefined, random } from "lodash";
 import { nanoid } from "nanoid";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
@@ -11,17 +10,10 @@ import {
   NumericFormatStyled,
   Error,
   H1,
+  Row,
 } from "./Styled";
 import { sleep } from "./utilities";
-
-export interface Warrant {
-  warrantID: string;
-  warrantName: string;
-  amountAvailable: number;
-  evaluatedPrice: number | undefined;
-}
-
-export type Warrants = Warrant[];
+import { Warrant, Warrants } from "../interface/Warrant";
 
 const ERROR = {
   EXCEED: "Exceeds asset balance",
@@ -286,7 +278,6 @@ export const Swap = () => {
               placeholder="$ 0.00"
               prefix="$ "
               disabled={sourceLoading}
-              isError={!isNull(sourceValueError)}
             />
             {sourceValueError && <Error>{sourceValueError}</Error>}
           </Container>
@@ -332,7 +323,6 @@ export const Swap = () => {
               placeholder="$ 0.00"
               prefix="$ "
               disabled={targetLoading}
-              isError={!isNull(targetValueError)}
             />
             {targetValueError && <Error>{targetValueError}</Error>}
           </Container>
