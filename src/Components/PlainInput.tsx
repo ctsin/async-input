@@ -18,7 +18,11 @@ export const PlainInput = () => {
   return (
     <CardContainer>
       <H1>Plain Input</H1>
-      <NumericPlain value={value} onValueChange={onValueChange} />
+      <NumericPlain
+        value={value}
+        onValueChange={onValueChange}
+        thousandSeparator=","
+      />
     </CardContainer>
   );
 };
