@@ -6,12 +6,14 @@ import { PlainInputAsync } from "./Components/PlainInputAsync";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BankCard } from "./Components/BankCard";
 import { CreatePool } from "./Components/CreatePool";
+import { Formiky } from "./Components/WhatIsComponentType";
 
 export const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <CreatePool />
+      <Formiky />
+      {/* <CreatePool /> */}
       {/* <PlainInput /> */}
       {/* <PlainInputAsync /> */}
       {/* <FormikForm /> */}
