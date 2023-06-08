@@ -8,12 +8,14 @@ import { BankCard } from "./Components/BankCard";
 import { CreatePool } from "./Components/CreatePool";
 import { Validation } from "./Components/Validation";
 import { FieldWithArray } from "./Components/FieldWithArray";
+import { FieldArrayUseEffect } from "./Components/FieldArrayUseEffect";
 
 export const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <FieldWithArray />
+      <FieldArrayUseEffect />
+      {/* <FieldWithArray /> */}
       {/* <Validation /> */}
       {/* <CreatePool /> */}
       {/* <PlainInput /> */}
